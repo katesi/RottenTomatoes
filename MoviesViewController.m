@@ -40,8 +40,9 @@ BOOL networkError = FALSE;
      {
          [SVProgressHUD dismiss];
          if (connectionError != nil) {
-             [self.tableView reloadData];
              networkError = TRUE;
+             [self.tableView reloadData];
+
              [self.refreshControl endRefreshing];
              return;
          }

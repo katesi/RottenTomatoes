@@ -31,6 +31,7 @@
     self.audienceLabel.text =  [NSString stringWithFormat:@"%@",ratings[@"audience_score"]];
     
     self.scrollView.contentSize = CGSizeMake(150, 800);
+    self.synopsisLabel.numberOfLines = 20;
    
     NSString *url_tmb = [self.movie valueForKeyPath:@"posters.thumbnail"];
     NSString* url = [url_tmb stringByReplacingOccurrencesOfString:@"_tmb.jpg" withString:@"_ori.jpg"];
@@ -38,7 +39,18 @@
     
     self.synopsisLabel.text = self.movie[@"synopsis"];
     
-   
+    CGSize maximumLabelSize = CGSizeMake(296, FLT_MAX);
+    
+    CGSize expectedLabelSize = [self.synopsisLabel.text sizeWithFont:self.synopsisLabel.font constrainedToSize:maximumLabelSize lineBreakMode:self.synopsisLabel.lineBreakMode];
+
+    CGRect newFrame = self.synopsisLabel.frame;
+    newFrame.size.height = expectedLabelSize.height;
+    self.synopsisLabel.frame = newFrame;
+    
+    
+    NSLog(@"%@", self.synopsisLabel);
+    
+    
     
 }
 
